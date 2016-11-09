@@ -25,7 +25,7 @@ module Gamewisp
 
     def initialize
       self.token_store = TokenStore.new
-      self.auth = Authorizer.new 'createauth'
+      self.auth = Authorizer.new 'createauth', self.token_store
     end
 
     def authorize
@@ -57,6 +57,8 @@ module Gamewisp
     def get_subscribers
       url = "https://api.gamewisp.com/pub/v1/channel/subscribers"
 
+      dbg "Client.get_subscribers [access_token]", token_store.access_token
+
       response = HTTParty
         .get(url,
             :query => {
@@ -64,6 +66,9 @@ module Gamewisp
               :include => 'user,channel,benefits',
             }
           )
+
+      dbg "Client.get_subscribers [response.code]", response.code
+      dbg "Client.get_subscribers [response]", response
 
       response
     end

@@ -29,8 +29,8 @@ module Gamewisp
     #  debug_output $stdout
     #end
 
-    def initialize state
-      self.token_store = TokenStore.new
+    def initialize state, store
+      self.token_store = store
 
       self.gamewisp_url = 'api.gamewisp.com'
       self.authorize_path = "/pub/v1/oauth/authorize"
@@ -38,7 +38,7 @@ module Gamewisp
       self.port = token_store.endpoint_port
       self.redirect_uri = "http://#{host}:#{port}"
 
-      self.scopes = "read_only,subscriber_read_full"
+      self.scopes = "read_only,subscriber_read_full,user_read"
       self.state = state
     end
 
@@ -66,6 +66,7 @@ module Gamewisp
 
     def renew_tokens_with_auth_code code
       response = get_new_tokens_using_auth_code code
+      dbg("renew_tokens_with_auth_code", response)
       if response.code == 200
         token_store.save_access_token response["access_token"]
         token_store.save_refresh_token response["refresh_token"]
@@ -77,6 +78,7 @@ module Gamewisp
 
     def renew_tokens_with_refresh_token token
       response = get_new_tokens_using_refresh_token token
+      dbg("renew_tokens_with_refresh_token", response)
       if response.code == 200
         token_store.save_access_token response["access_token"]
         token_store.save_refresh_token response["refresh_token"]

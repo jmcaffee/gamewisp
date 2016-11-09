@@ -35,6 +35,11 @@ module Gamewisp
       end
       data = client.read(headers["Content-Length"].to_i)
 
+      dbg "Server:get_authentication_token [method]", method
+      dbg "Server:get_authentication_token [path]", path
+      dbg "Server:get_authentication_token [headers]", headers
+      dbg "Server:get_authentication_token [data]", data
+
       results = split_path_components path
 
       failed = false
