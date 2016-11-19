@@ -14,6 +14,38 @@ def get_auth
   client.authorize
 end
 
+
+class User
+
+  attr_accessor :id
+  attr_accessor :status
+  attr_accessor :subscribed_at
+  attr_accessor :tier_id
+  attr_accessor :channel_id
+  attr_accessor :username
+  attr_accessor :ign
+
+  def init data
+    self.id = data["user_id"]
+    self.status = data["status"]
+    self.subscribed_at = data["subscribed_at"]
+    self.tier_id = data["tier_id"]
+    self.channel_id = data["channel_id"]
+    self.username = data["user"]["data"]["username"]
+    self.ign = data["benefits"]["data"]
+  end
+end
+
+def get_user_info
+  cl = client
+  response = cl.get_subscribers
+  subs = response["data"][0]
+
+  user = User.new
+  user.init subs
+  user
+end
+
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"
 Pry.start
