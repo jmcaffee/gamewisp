@@ -83,7 +83,7 @@ Gamewisp.configure do |config|
   config.log_dir = config.app_path
 end
 
-end
+
 
 if ENV["DEBUG"] and ENV["DEBUG"] == "1"
   $DEBUG = true
