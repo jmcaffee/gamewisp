@@ -18,9 +18,9 @@ module Gamewisp
 
   def self.app_data_path(create = false)
     app = Gamewisp.appname
-    app ||= "Gamewisp Client"
+    app ||= "gamewisp_client"
 
-    path = File.join(Gamewisp.system_data_path, Gamewisp.appname)
+    path = File.join(Gamewisp.system_data_path, app)
     FileUtils.mkdir_p(path) if create
     path
   end
@@ -34,7 +34,7 @@ module Gamewisp
     app = Gamewisp.appname
     app ||= "Gamewisp Client"
 
-    path = File.join(Gamewisp.system_config_path, Gamewisp.appname)
+    path = File.join(Gamewisp.system_config_path, app)
     FileUtils.mkdir_p(path) if create
     path
   end
