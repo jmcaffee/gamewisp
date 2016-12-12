@@ -20,23 +20,28 @@ module Gamewisp
     end
 
     def client_id
-      ENV["GAMEWISP_ID"]
+      id = ENV["GAMEWISP_ID"]
+      id ||= Gamewisp.configuration.client_id
     end
 
     def client_secret
-      ENV["GAMEWISP_SECRET"]
+      secret = ENV["GAMEWISP_SECRET"]
+      secret ||= Gamewisp.configuration.client_secret
     end
 
     def app_name
-      ENV["GAMEWISP_APP"]
+      name = ENV["GAMEWISP_APP"]
+      name ||= Gamewisp.appname
     end
 
     def endpoint_host
-      ENV["GAMEWISP_ENDPOINT_HOST"]
+      host = ENV["GAMEWISP_ENDPOINT_HOST"]
+      host ||= Gamewisp.configuration.endpoint_host
     end
 
     def endpoint_port
-      ENV["GAMEWISP_ENDPOINT_PORT"]
+      port = ENV["GAMEWISP_ENDPOINT_PORT"]
+      port ||= Gamewisp.configuration.endpoint_port
     end
 
     def save_access_token token
