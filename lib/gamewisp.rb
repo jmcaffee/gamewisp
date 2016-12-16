@@ -40,7 +40,7 @@ module Gamewisp
   end
 
   def self.config_file_path
-    File.join(Submon.app_config_path(true), 'gamewisp.config.yml')
+    File.join(Gamewisp.app_config_path(true), 'gamewisp.config.yml')
   end
 
   def self.configure
@@ -49,7 +49,7 @@ module Gamewisp
   end
 
   def self.load_configuration cfg_file = nil
-    cfg_file ||= Submon.config_file_path
+    cfg_file ||= Gamewisp.config_file_path
 
     if File.exist? cfg_file
       @configuration = YAML.load_file(cfg_file)
@@ -57,7 +57,7 @@ module Gamewisp
   end
 
   def self.save_configuration cfg_file = nil
-    cfg_file ||= Submon.config_file_path
+    cfg_file ||= Gamewisp.config_file_path
 
     raise ArgumentError, 'Directory provided. Need file path' if File.directory?(cfg_file)
 
@@ -68,7 +68,8 @@ module Gamewisp
 
 
   class Configuration
-    attr_accessor :version
+    attr_reader :version
+
     attr_accessor :app_path
     attr_accessor :logging
     attr_accessor :max_log_size

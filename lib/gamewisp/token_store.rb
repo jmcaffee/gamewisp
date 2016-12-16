@@ -63,12 +63,8 @@ module Gamewisp
     end
 
     def token_file_path
-      filedir = "#{ENV['HOME']}/.gamewisp"
-      filepath = File.join(filedir, "tokens.yml")
-
-      unless File.exist?(filedir)
-        FileUtils.mkdir_p filedir
-      end
+      filedir = Gamewisp.app_data_path(true)
+      filepath = File.join(filedir, "gamewisp.tokens.yml")
 
       filepath
     end
