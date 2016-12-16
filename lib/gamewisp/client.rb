@@ -24,6 +24,7 @@ module Gamewisp
     #end
 
     def initialize
+      Gamewisp.load_configuration
       self.token_store = TokenStore.new
       self.auth = Authorizer.new 'createauth', self.token_store
     end
