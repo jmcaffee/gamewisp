@@ -62,7 +62,7 @@ module Gamewisp
     raise ArgumentError, 'Directory provided. Need file path' if File.directory?(cfg_file)
 
     File.open(cfg_file, 'w') do |out|
-      YAML.dump(configuration, out)
+      YAML.dump(self.configuration, out)
     end
   end
 
